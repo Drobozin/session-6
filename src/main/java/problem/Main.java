@@ -60,8 +60,8 @@ public class Main {
             }
             System.out.println("Server is stopped");
 
-        }catch(Exception ignored){
-
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 }
