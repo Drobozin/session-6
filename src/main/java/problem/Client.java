@@ -15,7 +15,7 @@ public class Client implements Serializable {
         this.salary = salary;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
     public void setId(int id){

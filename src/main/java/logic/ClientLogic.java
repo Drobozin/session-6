@@ -15,8 +15,7 @@ public class ClientLogic {
         String name = clientParams.get("name");
         int age = Integer.parseInt(clientParams.get("age"));
         double salary = Double.parseDouble(clientParams.get("salary").replace(",", "."));
-        int id = getNewId();
-        return saveClient(id, new Client(id, name, age, salary));
+        return saveClient(new Client(getNewId(), name, age, salary));
     }
 
     public static String deleteClient(String id){
@@ -72,14 +71,15 @@ public class ClientLogic {
         return max+1;
     }
 
-    private static String saveClient(int id, Client client){
+    private static String saveClient(Client client){
         StringBuilder answer = new StringBuilder();
         answer
                 .append(Main.answerOK)
-                .append("id:").append(id).append("\n");
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(usersPath + "/" + id + ".bin"))) {
+                .append("id:").append(client.getId()).append("\n");
+        try (ObjectOutputStream oos = new ObjectOutputStream
+                (new FileOutputStream(usersPath + "/" + client.getId() + ".bin"))) {
             oos.writeObject(client);
-        }catch(Exception e){}
+        }catch(Exception e){e.printStackTrace();}
         return answer.toString();
     }
 

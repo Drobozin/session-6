@@ -29,44 +29,27 @@ public class Main {
                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
 
                 String request = br.readLine();
-                if(request != null) {
-                    System.out.println(request);
-
-                }
-
                 String answer = "";
-                if (request.contains(commandCreate)) {
-                    String [] reqArr = request.split(" ");
+                assert request != null;
+                String [] reqArr = request.split(" ");
                     for (String iReqArr : reqArr) {
                         if (iReqArr.startsWith(commandCreate) ) {
                             answer = ClientLogic.createClient(iReqArr);
                         }
-                    }
-
-                }else if(request.contains(commandDelete)){
-                    String [] reqArr = request.split(" ");
-                    for (String iReqArr : reqArr) {
-                        if (iReqArr.startsWith(commandDelete) ) {
+                        else if (iReqArr.startsWith(commandDelete) ) {
                             int start = iReqArr.lastIndexOf('/')+1;
                             String id = iReqArr.substring(start, iReqArr.length());
                             answer = ClientLogic.deleteClient(id);
                         }
-                    }
-
-                }else if(request.contains(commandList)){
-                    answer = ClientLogic.getClientsList();
-
-                }else if(request.contains(commandGetUser)){
-                    String [] reqArr = request.split(" ");
-                    for (String iReqArr : reqArr) {
-                        if (iReqArr.startsWith(commandGetUser) ) {
+                        else if(request.contains(commandList)) {
+                            answer = ClientLogic.getClientsList();
+                        }
+                        else if (iReqArr.startsWith(commandGetUser) ) {
                             int start = iReqArr.lastIndexOf('/')+1;
                             String id = iReqArr.substring(start, iReqArr.length());
                             answer = ClientLogic.getClient(id);
                         }
                     }
-                }
-
                 out.write(answer);
                 out.flush();
                 out.close();
@@ -77,8 +60,8 @@ public class Main {
             }
             System.out.println("Server is stopped");
 
-        }catch(Exception ignored){
-
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 }
