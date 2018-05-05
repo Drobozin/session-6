@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 import problem.Client;
 import problem.Main;
